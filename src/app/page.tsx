@@ -38,30 +38,36 @@ const App: React.FC = () => {
   };
 
   return (
-    <DndProvider backend={HTML5Backend}>
-      <div className="p-8 min-h-screen w-full min-w-full">
-        <h1 className="text-2xl font-bold mb-4">Kart Uygulaması</h1>
-        <div className="flex w-full flex-wrap gap-5">
-          <h1>Tüm Kartlar</h1>
-          {cards
-            .filter((card) => !selectedCards.includes(card.id)) // Sadece seçili kartları filtreleyerek görüntüle
-            .map((card, index) => (
-              <Card
-                key={card.id}
-                id={card.id}
-                text={card.text}
-                index={index}
-                moveCard={moveCard}
-                setDraggedCardId={setDraggedCardId}
-              />
-            ))}
+    <div
+      className="
+          bg-black
+      "
+    >
+      <DndProvider backend={HTML5Backend}>
+        <div className="p-8 min-h-screen w-full min-w-full">
+          <h1 className="text-2xl font-bold mb-4">Kart Uygulaması</h1>
+          <div className="flex w-full flex-wrap gap-5">
+            <h1>Tüm Kartlar</h1>
+            {cards
+              .filter((card) => !selectedCards.includes(card.id)) // Sadece seçili kartları filtreleyerek görüntüle
+              .map((card, index) => (
+                <Card
+                  key={card.id}
+                  id={card.id}
+                  text={card.text}
+                  index={index}
+                  moveCard={moveCard}
+                  setDraggedCardId={setDraggedCardId}
+                />
+              ))}
+          </div>
+          <SelectedCardsArea
+            selectedCards={selectedCards}
+            handleRemoveCard={handleCardSelect}
+          />
         </div>
-        <SelectedCardsArea
-          selectedCards={selectedCards}
-          handleRemoveCard={handleCardSelect}
-        />
-      </div>
-    </DndProvider>
+      </DndProvider>
+    </div>
   );
 };
 
